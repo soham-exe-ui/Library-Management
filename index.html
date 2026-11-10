@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Library Management System</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="book-symbol">▤</div>
+    <h1>Library Management System</h1>
+    <p>Manage books, students and transactions</p>
+  </div>
+</header>
+<nav aria-label="Library operations">
+  <button class="nav-btn active" data-section="dashboard">Dashboard</button>
+  <button class="nav-btn" data-section="addBook">Add Book</button>
+  <button class="nav-btn" data-section="books">Display Books</button>
+  <button class="nav-btn" data-section="search">Search Book</button>
+  <button class="nav-btn" data-section="issue">Issue Book</button>
+  <button class="nav-btn" data-section="return">Return Book</button>
+  <button class="nav-btn" data-section="issued">Issued Books</button>
+</nav>
+<main>
+  <section id="dashboard" class="section active">
+    <div class="section-heading"><div><span class="eyebrow">LIBRARY OVERVIEW</span><h2>Dashboard</h2><p class="muted">Welcome to your library. Here's what's happening today.</p></div><span class="date-chip" id="today"></span></div>
+    <div class="stats-grid">
+      <article class="stat-card"><div class="stat-icon">▤</div><div><p>Total Titles</p><strong id="totalTitles">0</strong></div></article>
+      <article class="stat-card"><div class="stat-icon available">✓</div><div><p>Available Copies</p><strong id="availableCopies">0</strong></div></article>
+      <article class="stat-card"><div class="stat-icon issued">↗</div><div><p>Active Issues</p><strong id="activeIssues">0</strong></div></article>
+    </div>
+    <div class="welcome-card"><div class="welcome-art">📚</div><div><h3>Welcome to the Library</h3><p>Select an operation from the menu above to manage your books, search the collection, or handle student transactions.</p></div></div>
+  </section>
+
+  <section id="addBook" class="section">
+    <div class="section-heading"><div><span class="eyebrow">COLLECTION MANAGEMENT</span><h2>Add New Book</h2><p class="muted">Enter the details to add a book to your library.</p></div></div>
+    <form id="addBookForm" class="form-card">
+      <div class="form-grid">
+        <label>Book ID<input id="bookId" placeholder="e.g. BK-101" required maxlength="30"></label>
+        <label>Book Title<input id="title" placeholder="Enter book title" required maxlength="120"></label>
+        <label>Author<input id="author" placeholder="Enter author name" required maxlength="100"></label>
+        <label>Publication Year<input type="number" id="year" min="1" max="2026" placeholder="e.g. 2024" required></label>
+        <label>Available Copies<input type="number" id="copies" min="0" max="10000" placeholder="e.g. 5" required></label>
+      </div>
+      <div class="form-actions"><button type="reset" class="btn btn-light">Clear</button><button type="submit" class="btn btn-primary">Add Book</button></div>
+    </form>
+  </section>
+
+  <section id="books" class="section">
+    <div class="section-heading"><div><span class="eyebrow">YOUR COLLECTION</span><h2>Book Inventory</h2><p class="muted">All books currently registered in the library.</p></div><span class="count-chip" id="bookCount">0 books</span></div>
+    <div class="table-container"><table><thead><tr><th>Book ID</th><th>Title</th><th>Author</th><th>Year</th><th>Available Copies</th></tr></thead><tbody id="bookTable"></tbody></table></div>
+  </section>
+
+  <section id="search" class="section">
+    <div class="section-heading"><div><span class="eyebrow">FIND A TITLE</span><h2>Search Books</h2><p class="muted">Search by Book ID, title or author.</p></div></div>
+    <form id="searchForm" class="search-card"><div class="search-input-wrap"><span>⌕</span><input id="searchQuery" placeholder="Enter Book ID, title or author..." autocomplete="off"></div><button class="btn btn-primary" type="submit">Search</button></form>
+    <div id="searchResults" class="table-container results-container"><div class="placeholder">Your search results will appear here.</div></div>
+  </section>
+
+  <section id="issue" class="section">
+    <div class="section-heading"><div><span class="eyebrow">STUDENT TRANSACTIONS</span><h2>Issue a Book</h2><p class="muted">Assign an available book to a student.</p></div></div>
+    <form id="issueForm" class="form-card narrow-form">
+      <label>Book ID<input id="issueBookId" placeholder="Enter Book ID" required></label>
+      <label>Student ID<input id="issueStudentId" placeholder="Enter Student ID" required></label>
+      <button type="submit" class="btn btn-primary full-btn">Issue Book</button>
+    </form>
+  </section>
+
+  <section id="return" class="section">
+    <div class="section-heading"><div><span class="eyebrow">STUDENT TRANSACTIONS</span><h2>Return a Book</h2><p class="muted">Record a returned book and update its availability.</p></div></div>
+    <form id="returnForm" class="form-card narrow-form">
+      <label>Book ID<input id="returnBookId" placeholder="Enter Book ID" required></label>
+      <label>Student ID<input id="returnStudentId" placeholder="Enter Student ID" required></label>
+      <button type="submit" class="btn btn-primary full-btn">Return Book</button>
+    </form>
+  </section>
+
+  <section id="issued" class="section">
+    <div class="section-heading"><div><span class="eyebrow">LENDING REGISTER</span><h2>Currently Issued Books</h2><p class="muted">Books that are currently with students.</p></div><span class="count-chip" id="issuedCount">0 active</span></div>
+    <div class="table-container"><table><thead><tr><th>Book ID</th><th>Book Title</th><th>Student ID</th><th>Issue Date</th><th>Status</th></tr></thead><tbody id="issuedTable"></tbody></table></div>
+  </section>
+  <div id="message" role="status" aria-live="polite"></div>
+</main>
+<footer><p>Library Management System <span>·</span> HTML, CSS & JavaScript</p></footer>
+<script src="script.js"></script>
+</body>
+</html>
